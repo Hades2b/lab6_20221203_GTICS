@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/login/**", "/registro", "/css/**", "/js/**", "/img/**").permitAll()
                         .requestMatchers("/heroes/**").permitAll()
 
+//                        .requestMatchers("/heroes/**").hasRole("USUARIO")
                         .requestMatchers("/intenciones/**").hasRole("USUARIO")
                         .requestMatchers("/canciones/**").hasRole("USUARIO")
                         .requestMatchers("/halloween/**").hasRole("USUARIO")
@@ -44,7 +45,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-//                        .loginPage("/login")
+                        .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
@@ -74,31 +75,35 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.userDetailsService(usuarioDetailService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        builder.userDetailsService(usuarioDetailService)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+        ;
         return builder.build();
     }
 
-    @Bean
-    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler() {
-            @Override
-            protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-                Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-                for (GrantedAuthority authority : authorities) {
-                    switch (authority.getAuthority()) {
-                        case "ROLE_ADMIN":
-                            return "/heroes";
-                        case "ROLE_USUARIO":
-                            return "/heroes";
-                        case "ROLE_VISITANTE":
-                            return "/heroes";
-                    }
-                }
-                return "/login";
-            }
-        };
-    }
+//    @Bean
+//    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+//        return new SimpleUrlAuthenticationSuccessHandler() {
+//            @Override
+//            protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+//                Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+//
+//                for (GrantedAuthority authority : authorities) {
+//                    switch (authority.getAuthority()) {
+//                        case "ROLE_ADMIN":
+//                            return "/heroes";
+//                        case "ROLE_USUARIO":
+//                            return "/heroes";
+//                        case "ROLE_VISITANTE":
+//                            return "/heroes";
+//                        default:
+//                            System.out.println("autoridad o rol: "+authority.getAuthority());
+//                    }
+//                }
+//                return "/login";
+//            }
+//        };
+//    }
 
     @Bean
     PasswordEncoder getPasswordEncoder() {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<form th:action="@{/login}" method="post">
+    <p>
+        <label for="username" class="">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required="" autofocus="">
+    </p>
+    <p>
+        <label for="password" class="">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required="">
+    </p>
+    <button type="submit" class="btn-primary">Ingresar</button>
+</form>
+</body>
+</html>

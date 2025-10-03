@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Heroes</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
 
 <div>
 </div>
 <div class="container mt-4">
-    <header th:replace="/header :: header"></header>
+    <header th:replace="header :: header"></header>
 
     <div th:if="${msg}" class="alert alert-success" role="alert" th:text="${msg}">
         Mensaje
@@ -24,8 +25,8 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-baseline">
                                     <h5 class="card-title mb-0 mr-2" th:text="${heroe.nombre}">Nombre Completo</h5>
-                                    <span class="badge align-self-center" th:text="'Edad: '+${heroe.rango.nombreRango}">Rango</span>
-                                    <span class="badge align-self-center" th:text="'Edad: '+${heroe.pais}">Pais</span>
+                                    <span class="badge align-self-center" th:text="'Rango: '+${heroe.rango.nombreRango}">Rango</span>
+                                    <span class="badge align-self-center" th:text="'Pais: '+${heroe.pais}">Pais</span>
                                 </div>
                             </div>
                         </div>

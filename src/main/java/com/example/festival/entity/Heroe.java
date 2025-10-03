@@ -17,7 +17,7 @@ public class Heroe {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(length = 255)
+    @Column(length = 255, name = "")
     private String resena;
 
     @Column(length = 50)

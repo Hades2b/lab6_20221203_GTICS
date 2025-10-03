@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/estilos.css">
-</head>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>>
 <body>
 <header class="navbar-expand-md sub-navbar">
     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -12,7 +12,7 @@
             <div class="container-xl">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/heroes}">
+                        <a class="nav-link" th:href="@{/heroes/}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fas fa-home"></i>
                             </span>
