@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
-</head>>
+</head>
 <body>
 <header class="navbar-expand-md sub-navbar">
     <div class="collapse navbar-collapse" id="navbar-menu">
@@ -12,7 +12,7 @@
             <div class="container-xl">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/heroes/}">
+                        <a class="nav-link" th:href="@{/heroes}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fas fa-home"></i>
                             </span>
@@ -25,7 +25,7 @@
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fas fa-folder"></i>
                             </span>
-                            <span class="nav-link-title">Mensajes</span>
+                            <span class="nav-link-title">Petición</span>
                         </a>
                     </li>
 
@@ -34,9 +34,17 @@
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                               <i class="fas fa-code"></i>
                             </span>
-                            <span class="nav-link-title">Ranking</span>
+                            <span class="nav-link-title">Juegos</span>
                         </a>
                     </li>
+
+                    <th:block sec:authorize="!isFullyAuthenticated()">
+                        <a th:href="@{/login}" class="btn btn-primary">Iniciar Sesión</a>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <a th:href="@{/logout}" class="btn btn-secondary">Cerrar Sesión</a>
+                    </th:block>
+
                 </ul>
             </div>
         </div>

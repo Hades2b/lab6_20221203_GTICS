@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Heroes</title>
@@ -16,6 +16,11 @@
         Mensaje
     </div>
 
+
+
+    <div class="mb-3" sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/heroes/nuevo}" class="btn btn-primary">Nuevo Héroe</a>
+    </div>
     <div class="row justify-content-between">
         <div class="col-12">
             <div class="row">
