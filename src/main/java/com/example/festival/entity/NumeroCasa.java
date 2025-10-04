@@ -30,9 +30,10 @@ public class NumeroCasa {
         this.usuario = usuario;
     }
 
-    public NumeroCasa(Usuario usuario, Integer numObjetivo) {
+    public NumeroCasa(Integer id, Usuario usuario, Integer numObjetivo) {
         this.usuario = usuario;
         this.numeroObjetivo = numObjetivo;
+        this.id = id;
     }
 
     public Integer getId() {

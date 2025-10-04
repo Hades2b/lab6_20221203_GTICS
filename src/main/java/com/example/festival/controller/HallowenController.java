@@ -147,7 +147,8 @@ public class HallowenController {
         Optional<Usuario> usuario = usuarioRepository.findById(nuevaAsignacionNumDto.getIdUsuario());
 
         if (usuario.isPresent()) {
-            NumeroCasa nuevaAsignacion = new NumeroCasa(usuario.get(), nuevaAsignacionNumDto.getNumObjetivo());
+            NumeroCasa asigOrig = numeroCasaRepository.findByUsuario_Id(usuario.get().getId());
+            NumeroCasa nuevaAsignacion = new NumeroCasa(asigOrig.getId(),usuario.get(), nuevaAsignacionNumDto.getNumObjetivo());
             numeroCasaRepository.save(nuevaAsignacion);
             redirectAttributes.addFlashAttribute("msg", "Asignación creada correctamente");
 

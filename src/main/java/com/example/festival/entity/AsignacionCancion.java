@@ -32,9 +32,10 @@ public class AsignacionCancion {
         this.usuario = usuario;
     }
 
-    public AsignacionCancion(Usuario usuario, Cancion cancion) {
+    public AsignacionCancion(Integer id, Usuario usuario, Cancion cancion) {
         this.usuario = usuario;
         this.cancion = cancion;
+        this.id = id;
     }
 
     public Integer getId() {

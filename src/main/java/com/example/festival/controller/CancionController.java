@@ -175,7 +175,8 @@ public class CancionController {
         Optional<Cancion> cancion = cancionRepository.findById(nuevaAsignacionDto.getIdCancion());
 
         if (usuario.isPresent() && cancion.isPresent()) {
-            AsignacionCancion nuevaAsignacion = new AsignacionCancion(usuario.get(), cancion.get());
+            AsignacionCancion asigOrignial = asignacionRepository.findByUsuario_Id(usuario.get().getId());
+            AsignacionCancion nuevaAsignacion = new AsignacionCancion(asigOrignial.getId(),usuario.get(), cancion.get());
             asignacionRepository.save(nuevaAsignacion);
             redirectAttributes.addFlashAttribute("msg", "Asignación creada correctamente");
 
