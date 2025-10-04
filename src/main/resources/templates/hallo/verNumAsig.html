@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Halloween</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <header th:replace="header :: header"></header>
+
+    <div th:if="${msg}" class="alert alert-info" role="alert" th:text="${msg}">
+        Mensaje
+    </div>
+
+    <div th:if="${numAsignado != null}">
+        <h2>Juego de Adivinar</h2>
+        <p><strong>Intentos:</strong> <span th:text="${numIntentos}"></span></p>
+
+        <small class="text-muted">Este es tu progreso</small>
+        <p><strong>Progreso: </strong> <span th:text="${numProgreso}"></span></p>
+
+
+        <form th:action="@{/halloween/adivinar}" method="post" th:if="${!numAsignado.adivinado}">
+            <div class="mb-3">
+                <label for="adivinar" class="form-label">Intenta adivinar el numero objetivo sumando pasos de 6</label>
+                <input type="number" min="1" max="6" id="adivinar" name="adivinar" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Adivinar</button>
+        </form>
+    </div>
+
+    <div th:if="${(numAsignado == null and solicitada == false) or (numAsignado != null and numAsignado.adivinado.booleanValue())}">
+        <form th:action="@{/halloween/solicitar}" method="post">
+            <button type="submit" class="btn btn-success">Solicitar asignación</button>
+        </form>
+    </div>
+
+    <div th:if="${numAsignado == null and solicitada == true}">
+        <div class="alert alert-info">
+            Ya solicitaste una asignación, pero aún no se te ha asignado ningun numero.
+            Por favor espera para poder jugar.
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@
             <h5>Crear Nueva Asignación</h5>
         </div>
         <div class="card-body">
-            <form th:action="@{/canciones/asignar}" th:object="${nuevaAsignacionDto}" method="post">
+            <form th:action="@{/halloween/asignar}" th:object="${nuevaAsignacionNumDto}" method="post">
 
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Usuario solicitante</label>
@@ -27,17 +27,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="cancion" class="form-label">Canción</label>
-                    <select id="cancion" class="form-select" th:field="*{idCancion}" required>
-                        <option value="" disabled selected>-- Seleccione una canción --</option>
-                        <option th:each="c : ${listaCanciones}"
-                                th:value="${c.id}"
-                                th:text="${c.titulo}"></option>
-                    </select>
+                    <label for="numObjetivo" class="form-label">Número objetivo</label>
+                    <input type="number" id="numObjetivo" class="form-control"
+                           th:field="*{numObjetivo}" min="10" max="64" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar Asignación</button>
-                <a th:href="@{/canciones/listaAsignaciones}" class="btn btn-secondary">Cancelar</a>
+                <a th:href="@{/halloween/listaAsignaciones}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>

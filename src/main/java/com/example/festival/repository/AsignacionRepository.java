@@ -13,4 +13,5 @@ public interface AsignacionRepository extends JpaRepository<AsignacionCancion, I
 
     List<AsignacionCancion> findByCancionNull();
 
+    List<AsignacionCancion> findByAdivinadaTrueOrderByIntentosAsc();
 }

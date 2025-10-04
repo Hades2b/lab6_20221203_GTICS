@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Mesas</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
-$END$
+<div class="container mt-4">
+    <header th:replace="header :: header"></header>
+
+    <div th:if="${msg}" class="alert alert-info" role="alert" th:text="${msg}">
+        Mensaje
+    </div>
+
+    <h2 class="mb-4">Listado de Mesas</h2>
+
+    <div class="d-flex gap-3 mb-3">
+    <span class="badge bg-success">
+        Disponibles: <span th:text="${disponibles}"></span>
+    </span>
+        <span class="badge bg-danger">
+        Ocupadas: <span th:text="${ocupadas}"></span>
+    </span>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="mesa : ${listaMesas}">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Mesa N°: <span th:text="${mesa.numero}"></span></span>
+                    <form th:action="@{'/reservas/mesas/' + ${mesa.id} +'/reservar/'}" method="post" th:if="${mesa.disponible}">
+                        <button type="submit" class="btn btn-primary btn-sm">Reservar</button>
+                    </form>
+
+                    <div class="" sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{'/reservas/mesas/' + ${mesa.id}}" class="btn btn-dark btn-sm">Administrar Mesa</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <p><strong>Capacidad:</strong> <span th:text="${mesa.capacidad}"></span> personas</p>
+                    <p>
+                        <span th:if="${mesa.disponible}" class="badge bg-success">Disponible</span>
+                        <span th:if="${!mesa.disponible}" class="badge bg-danger">Ocupada</span>
+                    </p>
+                    <p><strong>Reservas:</strong>
+                        <span th:text="${#lists.size(mesa.reservas)}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

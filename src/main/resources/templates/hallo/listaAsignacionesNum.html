@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignaciones de Numero</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <header th:replace="header :: header"></header>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Asignaciones de Canciones</h5>
+            <a th:href="@{/halloween/nuevaAsignacion}" class="btn btn-primary btn-sm">Nueva Asignación</a>
+
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Número Objetivo</th>
+                    <th>Intentos</th>
+                    <th>Adivinada</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="asig : ${asignaciones}">
+                    <td th:text="${asig.usuario.nombre}"></td>
+                    <td>
+                        <span th:if="${asig.numeroObjetivo != null}" th:text="${asig.numeroObjetivo}"></span>
+                        <span th:if="${asig.numeroObjetivo == null}" class="text-muted">Sin asignar</span>
+                    </td>
+                    <td th:text="${asig.intentos}"></td>
+                    <td>
+                        <span th:if="${asig.adivinado}" class="badge badge-success">Adivinada</span>
+                        <span th:if="${!asig.adivinado}" class="badge badge-warning">No Adivinada</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

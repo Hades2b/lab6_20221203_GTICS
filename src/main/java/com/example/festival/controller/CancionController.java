@@ -87,6 +87,8 @@ public class CancionController {
         if (asignacion != null) {
           if (asignacion.getAdivinada() != null && !asignacion.getAdivinada()) {
               return "redirect:/canciones";
+          } else {
+              asignacionRepository.deleteById(asignacion.getId());
           }
         }
 
@@ -185,6 +187,13 @@ public class CancionController {
         }
 
         return "redirect:/canciones/listaAsignaciones";
+    }
+
+    @GetMapping("/ranking")
+    @PreAuthorize("isAuthenticated()")
+    public String mostrarRanking(Model model) {
+        model.addAttribute("listaRanking", asignacionRepository.findByAdivinadaTrueOrderByIntentosAsc());
+        return "rankingCanciones";
     }
 
 }

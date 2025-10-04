@@ -13,7 +13,6 @@
         Mensaje
     </div>
 
-    <!-- Caso 1: Existe asignación => mostrar juego -->
     <div th:if="${asignacion != null}">
         <h2>Juego de Adivinar</h2>
         <p><strong>Intentos:</strong> <span th:text="${intentos}"></span></p>
@@ -37,14 +36,12 @@
         </form>
     </div>
 
-    <!-- Caso 2: No hay asignación y solicitada == false => botón para solicitar -->
-    <div th:if="${(asignacion == null and solicitada == false) or asignacion.adivinada}">
+    <div th:if="${(asignacion == null and solicitada == false) or (asignacion != null and asignacion.adivinada.booleanValue())}">
         <form th:action="@{/canciones/solicitar}" method="post">
             <button type="submit" class="btn btn-success">Solicitar asignación</button>
         </form>
     </div>
 
-    <!-- Caso 3: No hay asignación y solicitada == true => mensaje de espera -->
     <div th:if="${asignacion == null and solicitada == true}">
         <div class="alert alert-info">
             Ya solicitaste una asignación, pero aún no se te ha asignado ninguna canción.

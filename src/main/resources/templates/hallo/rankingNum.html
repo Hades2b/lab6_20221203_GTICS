@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Ranking</title>
+    <title>Ranking Numero Casa</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
@@ -16,7 +16,7 @@
         <tr>
             <th>#</th>
             <th>Usuario</th>
-            <th>Canción</th>
+            <th>Numero Objetivo</th>
             <th>Intentos</th>
         </tr>
         </thead>
@@ -24,7 +24,7 @@
         <tr th:each="asig, iter : ${listaRanking}">
             <td th:text="${iter.index + 1}"></td>
             <td th:text="${asig.usuario.nombre}"></td>
-            <td th:text="${asig.cancion.titulo}"></td>
+            <td th:text="${asig.numeroObjetivo}"></td>
             <td th:text="${asig.intentos}"></td>
         </tr>
         </tbody>
