@@ -31,6 +31,8 @@ public class NumeroCasa {
     }
 
     public NumeroCasa(Usuario usuario, Integer numObjetivo) {
+        this.usuario = usuario;
+        this.numeroObjetivo = numObjetivo;
     }
 
     public Integer getId() {
