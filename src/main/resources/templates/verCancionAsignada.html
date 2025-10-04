@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Adivinar</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <header th:replace="header :: header"></header>
+
+    <div th:if="${msg}" class="alert alert-success" role="alert" th:text="${msg}">
+        Mensaje
+    </div>
+
+    <!-- Caso 1: Existe asignación => mostrar juego -->
+    <div th:if="${asignacion != null}">
+        <h2>Juego de Adivinar</h2>
+        <p><strong>Intentos:</strong> <span th:text="${intentos}"></span></p>
+        <p><strong>Progreso:</strong></p>
+        <div class="d-flex gap-2 mb-1">
+        <span th:each="c : ${progreso}"
+              th:text="${c}"
+              class="border px-2 py-1 text-center fs-4"></span>
+        </div>
+        <small class="text-muted">Este es el patrón del título</small>
+        <p><strong>Letras en en título pero en posicion incorrecta:</strong> <span th:text="${letrasTitutlo}"></span></p>
+        <p><strong>Caracteres en posición correcta:</strong> <span th:text="${posCorrecta}"></span></p>
+
+
+        <form th:action="@{/canciones/adivinar}" method="post" th:if="${!asignacion.adivinada}">
+            <div class="mb-3">
+                <label for="adivinar" class="form-label">Intenta adivinar el titulo de tu cancion asignada</label>
+                <input type="text" id="adivinar" name="adivinar" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Adivinar</button>
+        </form>
+    </div>
+
+    <!-- Caso 2: No hay asignación y solicitada == false => botón para solicitar -->
+    <div th:if="${(asignacion == null and solicitada == false) or asignacion.adivinada}">
+        <form th:action="@{/canciones/solicitar}" method="post">
+            <button type="submit" class="btn btn-success">Solicitar asignación</button>
+        </form>
+    </div>
+
+    <!-- Caso 3: No hay asignación y solicitada == true => mensaje de espera -->
+    <div th:if="${asignacion == null and solicitada == true}">
+        <div class="alert alert-info">
+            Ya solicitaste una asignación, pero aún no se te ha asignado ninguna canción.
+            Por favor espera para poder jugar.
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

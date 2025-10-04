@@ -32,13 +32,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/", "/login/**", "/registro", "/css/**", "/js/**", "/img/**").permitAll()
-                        .requestMatchers("/heroes/**").permitAll()
+                        .requestMatchers("/heroes").permitAll()
 
-//                        .requestMatchers("/heroes/**").hasRole("USUARIO")
-                        .requestMatchers("/intenciones/**").hasRole("USUARIO")
-                        .requestMatchers("/canciones/**").hasRole("USUARIO")
-                        .requestMatchers("/halloween/**").hasRole("USUARIO")
-                        .requestMatchers("/reservas/**").hasRole("USUARIO")
+                        .requestMatchers("/intencion/**").hasAnyRole("USUARIO", "ADMIN")
+                        .requestMatchers("/canciones/**").hasAnyRole("USUARIO", "ADMIN")
+                        .requestMatchers("/halloween/**").hasAnyRole("USUARIO", "ADMIN")
+                        .requestMatchers("/reservas/**").hasAnyRole("USUARIO", "ADMIN")
+                        .requestMatchers("/heroes/**").hasRole("ADMIN")
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 

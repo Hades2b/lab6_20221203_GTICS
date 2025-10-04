@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Intención</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <header th:replace="header :: header"></header>
+
+    <div th:if="${intencion!=null and intencion.descripcion!=null}">
+        <h2>Tu intención actual</h2>
+        <p><strong>Intención:</strong> <span th:text="${intencion.descripcion}"></span></p>
+        <p><strong>Fecha:</strong> <span th:text="${#temporals.format(intencion.fecha, 'dd/MM/yyyy HH:mm')}"></span></p>
+    </div>
+
+    <div th:if="${intencion != null and intencion.descripcion==null}">
+        <h2>Crear nueva intención</h2>
+        <form th:action="@{/intencion/guardar}" th:object="${intencion}" method="post">
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Intención:</label>
+                <textarea id="descripcion" class="form-control"
+                          th:field="*{descripcion}" required></textarea>
+                <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

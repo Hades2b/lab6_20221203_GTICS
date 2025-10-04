@@ -846,6 +846,134 @@ p {
 .text-decoration-underline { text-decoration: underline !important; }
 .text-decoration-line-through { text-decoration: line-through !important; }
 
+/* ===== ESTILOS PARA FORMULARIOS ===== */
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--dark);
+    background-color: var(--white);
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-select:focus {
+    border-color: var(--primary);
+    outline: 0;
+}
+
+.form-check-input {
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.15em;
+    border: 1px solid #adb5bd;
+    transition: all 0.15s ease-in-out;
+}
+
+.form-check-input[type="checkbox"] {
+    border-radius: 0.25em;
+}
+
+.form-check-input[type="radio"] {
+    border-radius: 50%;
+}
+
+.form-check-input:focus {
+    border-color: var(--primary);
+    outline: 0;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.form-check-label {
+    margin-left: 0.5rem;
+    color: var(--dark);
+}
+
+.input-group {
+    display: flex;
+    width: 100%;
+}
+
+.input-group .form-control {
+    flex: 1;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: var(--gray);
+}
+
+.form-range {
+    width: 100%;
+    height: 1.5rem;
+}
+
+/* File input básico */
+.form-control[type="file"] {
+    padding: 0.375rem 0.75rem;
+}
+
+.form-control.error,
+.form-select.error {
+    border-color: var(--danger);
+}
+
+.form-control.error:focus,
+.form-select.error:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-check-input.error {
+    border-color: var(--danger);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--danger);
+}
+
+.form-control.error ~ .invalid-feedback,
+.form-select.error ~ .invalid-feedback,
+.form-check-input.error ~ .invalid-feedback {
+    display: block;
+}
+
+.form-control:disabled,
+.form-select:disabled {
+    background-color: #e9ecef;
+    opacity: 0.6;
+}
+
+.form-control-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.form-control-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+}
+
+.form-control.textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
 /* ===== UTILIDADES DE VISUALIZACIÓN ===== */
 .d-none { display: none !important; }
 .d-block { display: block !important; }

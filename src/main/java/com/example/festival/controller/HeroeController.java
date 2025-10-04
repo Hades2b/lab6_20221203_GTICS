@@ -3,6 +3,7 @@ package com.example.festival.controller;
 import com.example.festival.entity.Heroe;
 import com.example.festival.repository.HeroeRepository;
 import com.example.festival.repository.RangoRepository;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public class HeroeController {
 
     @PostMapping("/guardar")
     @PreAuthorize("hasRole('ADMIN')")
-    public String guardarHeroe(Model model, @ModelAttribute Heroe heroe, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String guardarHeroe(Model model, @Valid @ModelAttribute Heroe heroe, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("listaRangos", rangoRepository.findAll());
             return "nuevoHeroe";
